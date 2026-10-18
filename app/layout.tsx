@@ -23,15 +23,19 @@ const mono = IBM_Plex_Mono({
   display: "swap",
 });
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
+
 export const metadata: Metadata = {
+  ...(siteUrl ? { metadataBase: new URL(siteUrl) } : {}),
   title: "Saleh Haydar, full-stack developer",
   description:
-    "Full-stack developer in Beirut building fast, secure web apps with Next.js, React and Node.js. Background in web penetration testing and HackerOne research.",
+    "Full-stack developer in Tripoly building fast, secure web apps with Next.js, React and Node.js. Background in web penetration testing and HackerOne research.",
   openGraph: {
     title: "Saleh Haydar, full-stack developer",
     description: "Fast, secure web apps with Next.js, React and Node.js.",
     type: "website",
   },
+  twitter: { card: "summary_large_image" },
 };
 
 export const viewport: Viewport = {

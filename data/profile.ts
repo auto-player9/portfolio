@@ -3,7 +3,7 @@ export const profile = {
   firstName: "Saleh",
   lastName: "Haydar",
   role: "Full-stack developer",
-  location: "Beirut, Lebanon",
+  location: "Deir Ammar, Lebanon",
   email: "salehhasanhaydar@gmail.com",
   phone: "+961 79 496 160",
   phoneHref: "tel:+96179496160",
@@ -40,6 +40,8 @@ export type Project = {
   summary: string;
   href: string;
   duration?: string;
+  /** Optional screenshot in /public, e.g. "/projects/devflow.png" (1600x1000 works well). */
+  image?: string;
   stack: string[];
   details: { title: string; text: string }[];
 };

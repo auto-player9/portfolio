@@ -1,6 +1,8 @@
 "use client";
 
+import Image from "next/image";
 import { useId, useState } from "react";
+import ExternalIcon from "@/components/ExternalIcon";
 import type { Project } from "@/data/profile";
 
 export default function ProjectRow({ project }: { project: Project }) {
@@ -24,6 +26,7 @@ export default function ProjectRow({ project }: { project: Project }) {
         <div className="project__actions">
           <a className="project__live" href={project.href} target="_blank" rel="noopener noreferrer">
             {host}
+            <ExternalIcon />
             <span className="sr-only"> (opens in a new tab)</span>
           </a>
           <button
@@ -49,14 +52,39 @@ export default function ProjectRow({ project }: { project: Project }) {
 
       <div id={panelId} className="project__details" inert={!open}>
         <div>
-          <dl>
-            {project.details.map((d) => (
-              <div key={d.title}>
-                <dt>{d.title}</dt>
-                <dd>{d.text}</dd>
-              </div>
-            ))}
-          </dl>
+          <div className={`project__body${project.image ? " has-image" : ""}`}>
+            {project.image ? (
+              <a
+                className="project__shot"
+                href={project.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Open ${project.name} live site`}
+              >
+                <span className="project__shot-bar" aria-hidden="true">
+                  <i />
+                  <i />
+                  <i />
+                  <span>{host}</span>
+                </span>
+                <Image
+                  src={project.image}
+                  alt={`Screenshot of the ${project.name} website`}
+                  width={1600}
+                  height={1000}
+                  sizes="(max-width: 960px) 100vw, 560px"
+                />
+              </a>
+            ) : null}
+            <dl>
+              {project.details.map((d) => (
+                <div key={d.title}>
+                  <dt>{d.title}</dt>
+                  <dd>{d.text}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
         </div>
       </div>
     </li>

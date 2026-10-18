@@ -1,14 +1,9 @@
 import Inspector from "@/components/Inspector";
 import ProjectRow from "@/components/ProjectRow";
-import ThemeToggle from "@/components/ThemeToggle";
+import CopyEmail from "@/components/CopyEmail";
+import ExternalIcon from "@/components/ExternalIcon";
+import SiteHeader from "@/components/SiteHeader";
 import { experience, profile, projects, skills } from "@/data/profile";
-
-const nav = [
-  { href: "#work", label: "Work" },
-  { href: "#projects", label: "Projects" },
-  { href: "#security", label: "Security" },
-  { href: "#contact", label: "Contact" },
-];
 
 export default function Home() {
   return (
@@ -17,26 +12,7 @@ export default function Home() {
         Skip to content
       </a>
 
-      <header className="site-header">
-        <div className="wrap site-header__inner">
-          <a href="#top" className="brand" aria-label={`${profile.name}, back to top`}>
-            <span className="brand__mark" aria-hidden="true">
-              SH
-            </span>
-            <span className="brand__name">{profile.name}</span>
-          </a>
-          <nav aria-label="Sections">
-            <ul>
-              {nav.map((n) => (
-                <li key={n.href}>
-                  <a href={n.href}>{n.label}</a>
-                </li>
-              ))}
-            </ul>
-          </nav>
-          <ThemeToggle />
-        </div>
-      </header>
+      <SiteHeader />
 
       <main id="main">
         {/* Hero */}
@@ -77,6 +53,7 @@ export default function Home() {
                   <h3>
                     <a href={job.href} target="_blank" rel="noopener noreferrer">
                       {job.company}
+                      <ExternalIcon />
                     </a>
                   </h3>
                   <p>{job.role}</p>
@@ -169,9 +146,12 @@ export default function Home() {
             <p className="muted contact__lead">
               I&apos;m open to frontend and full-stack roles and freelance work. Email is the fastest way to reach me.
             </p>
-            <a className="contact__email" href={`mailto:${profile.email}`}>
-              {profile.email}
-            </a>
+            <div className="contact__email-row">
+              <a className="contact__email" href={`mailto:${profile.email}`}>
+                {profile.email}
+              </a>
+              <CopyEmail email={profile.email} />
+            </div>
             <div className="contact__rows">
               <p>
                 <span className="muted">Phone</span>
@@ -187,6 +167,7 @@ export default function Home() {
                   {profile.socials.map((s) => (
                     <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer">
                       {s.label}
+                      <ExternalIcon />
                     </a>
                   ))}
                 </span>
@@ -202,6 +183,9 @@ export default function Home() {
             © {new Date().getFullYear()} {profile.name}
           </p>
           <p className="muted">Built with Next.js and TypeScript</p>
+          <a href="#top" className="site-footer__top">
+            Back to top
+          </a>
         </div>
       </footer>
     </>
